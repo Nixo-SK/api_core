@@ -14,3 +14,8 @@ class DoesNotExistException(APIException):
 class DuplicateEntryException(APIException):
     status_code = 400
     default_detail = 'Duplicate entry.'
+
+
+class InternalServerErrorException(APIException):
+    status_code = 500
+    default_detail = 'An internal server error has occured.'
