@@ -3,12 +3,12 @@ from rest_framework.exceptions import APIException
 
 class InvalidRequestException(APIException):
     status_code = 400
-    default_detail = 'Invalid request data'
+    default_detail = 'Invalid request data.'
 
 
 class DoesNotExistException(APIException):
     status_code = 404
-    default_detail = 'Requested data does not exist'
+    default_detail = 'Requested data does not exist.'
 
 
 class DuplicateEntryException(APIException):
@@ -18,4 +18,4 @@ class DuplicateEntryException(APIException):
 
 class InternalServerErrorException(APIException):
     status_code = 500
-    default_detail = 'An internal server error has occured.'
+    default_detail = 'An internal server error has occurred.'
