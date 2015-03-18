@@ -1,11 +1,11 @@
-api-core
+api\_core
 ========
 
 Introduction
 ------
 
-api-core represents core module used primary in eszone_ projects providing authentication and additional functions for
-these projects.
+api\_core represents a core module used primary in eszone_ API projects providing an authentication, set of exceptions and
+a bunch of API views to manage tokens. 
 
 Installation
 ------
@@ -14,10 +14,10 @@ Installation
 
    `git submodule add *repository-link*`
 
-2. Append 'api_core' to INSTALLED_APPS in your Django project settings
+2. Append 'api\_core' to INSTALLED_APPS in your Django project settings
 
-3. Route api_core submodule in urls.py in your Django project settings
+3. Route api\_core submodule in a urls.py file in your Django project settings
 
 ```python
-   url(r'^my-url/', include('api_core.urls')),
+   url(r'^my-url-auth/', include('api_core.urls')),
 ```
