@@ -24,24 +24,29 @@ class AuthTokenViewSet(GenericViewSet):
     authentication_classes = (SimpleTokenAuthentication, )
     permission_classes = (IsAuthenticated, )
 
-    def list(self, request, pk):
+    def retrieve(self, request, pk=None):
         """
-        Method, responding to a GET request, lists a specific token stored in a database whenever an id is provided.
-        Otherwise list of all tokens is returned in a response.
+        Method, responding to a GET request, lists specific token stored in a database if an id is provided.
         :param request: request data
         :param pk: an unique identifier of a token
         :return: rest_framework.response.Response containing serialized data
         """
-        if pk is not None:
-            try:
-                auth_token = SimpleTokenAuthModel.objects.get(pk=pk)
-                serializer = SimpleTokenAuthSerializer(auth_token)
-            except SimpleTokenAuthModel.DoesNotExist:
-                raise core_exceptions.DoesNotExistException()
-        else:
-            auth_tokens = SimpleTokenAuthModel.objects.all()
-            serializer = SimpleTokenAuthSerializer(auth_tokens, many=True)
+        try:
+            auth_token = SimpleTokenAuthModel.objects.get(pk=pk)
+            serializer = SimpleTokenAuthSerializer(auth_token)
+        except SimpleTokenAuthModel.DoesNotExist:
+            raise core_exceptions.DoesNotExistException()
 
+        return Response(serializer.data)
+
+    def list(self, request):
+        """
+        Method, responding to a GET request, lists all tokens stored in a database and sends them in a response.
+        :param request: request data
+        :return: rest_framework.response.Response containing serialized data
+        """
+        auth_tokens = SimpleTokenAuthModel.objects.all()
+        serializer = SimpleTokenAuthSerializer(auth_tokens, many=True)
         return Response(serializer.data)
 
     def create(self, request):
@@ -79,8 +84,7 @@ class AuthTokenViewSet(GenericViewSet):
             raise core_exceptions.InvalidRequestException()
 
         auth_token.save()
-        serializer = SimpleTokenAuthSerializer(auth_token.get_token())
-        return Response(serializer.data)
+        return Response({'id': auth_token.id})
 
     def delete(self, request, pk=None):
         """
