@@ -3,6 +3,10 @@ from models import SimpleTokenAuthModel
 
 
 class SimpleTokenAuthSerializer(ModelSerializer):
+    """
+    ModelSerializer preparing output for responses sent to a client. Objects retrieved from a database using
+    SimpleTokenAuthModel are formatted by this serializer and passed to a Response constructor.
+    """
 
     class Meta:
         model = SimpleTokenAuthModel

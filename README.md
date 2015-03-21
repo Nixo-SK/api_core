@@ -5,7 +5,8 @@ Introduction
 ------
 
 api\_core represents a core module used primary in eszone_ API projects providing an authentication, set of exceptions and
-a bunch of API views to manage tokens. 
+a bunch of API views to manage tokens. Token is passed in a request data as a 'authentication.token' key followed by a
+value containing uuid4 string representation of a token.
 
 Installation
 ------
